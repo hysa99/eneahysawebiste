@@ -1,0 +1,30 @@
+{%extends 'base.html' %}
+
+
+{% block title %}{{ blog.name }}{% endblock %}
+
+
+{% block content %}
+<div class="grid grid-cols-5 gap-6">
+    <div class="col-span-3">
+        <img src="{{ blog.image.url }}" class="rounded-xl">
+    </div>
+
+    <div class="col-span-4 bg-gray-100 rounded-t-xl h-full">
+        <h1 class="text-center text-4xl text-bold">{{ blog.name }}</h1>
+        <br>
+        <p class="text-black-500">
+            {{ blog.description }}
+        </p>
+        <br>
+        <h6>{{ blog.tags }}</h6>
+        <br>
+        <hr class="w-72 bg-green-700 py-1 px-40 rounded-7xl w-48 h-xl mx-auto my-2 bg-green-100 border-0 rounded md:my-10">
+        <p>If you liked my blog give a like / star and share on other platforms:</p>
+        <span class="">Like</span>
+        <span class="fa-facebook">Facebook</span>
+        <span>Twitter</span>
+        <span>Linkedin</span>
+    </div>
+</div>
+{% endblock %}

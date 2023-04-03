@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Blogs{% endblock %}
+
+
+{% block content %}
+<div class="bg-gray-100 mt-4 py-12 rounded-xl">
+    <h1 class="mb-12 text-3xl text-center">My latest blogs</h1>
+    <div class="col-span-3">
+        <div class="grid grid-cols-3 gap-3 w-full">
+            {% for blog in blogs %}
+            <div>
+                <a href="{% url 'blogs:details' blog.id %}">
+                    <div>
+                        <img src="{{ blog.image.url }}" alt="image" class="rounded-t-xl">
+                    </div>
+        
+                    <div class="p-6 bg-white rounded-b-xl">
+                        <h1 class="text-2xl">{{ blog.name }}</h1>
+                        <p class="text-gray-500">{{ blog.description | truncatewords:20 }}€</p>
+                        <br>
+                        <span>{{ blog.tags }}</span>
+                        <br>
+                        <br>
+                        <a class="text-center text-1xl justify-center" href="{% url 'blogs:details' blog.id %}">Learn More</a>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
