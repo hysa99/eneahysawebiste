@@ -4,25 +4,33 @@
 
 
 {% block content %}
-<div class="bg-gray-100 mt-4 py-12 rounded-xl">
+<nav class="py-2 justify-center space-x-4 flex items-center">
+<a class="text-green-500 text-bold text-3xl text-right right-8" href="{% url 'dashboard:dashboard_view' %}"><i class="fa fa-area-chart color-green-500" aria-hidden="true"></i>  Dashboard</a>
+</nav>
+<div class="bg-gray-10 mt-4 py-12 rounded-xl">
     <h1 class="mb-12 text-3xl text-center">My latest blogs</h1>
-    <div class="col-span-3">
-        <div class="grid grid-cols-3 gap-3 w-full">
+    <div class="">
+        <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
             {% for blog in blogs %}
-            <div>
+            <div class="group relative gap-y-1">
                 <a href="{% url 'blogs:details' blog.id %}">
-                    <div>
+                    <div class="min-h-80 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md lg:aspect-none group-hover:opacity-100 lg:h-100">
                         <img src="{{ blog.image.url }}" alt="image" class="rounded-t-xl">
                     </div>
-        
-                    <div class="p-6 bg-white rounded-b-xl">
-                        <h1 class="text-2xl">{{ blog.name }}</h1>
-                        <p class="text-gray-500">{{ blog.description | truncatewords:20 }}€</p>
+                    
+
+                    <div class="p-4 bg-white rounded-b-xl mt-4 flex justify-between">
+                        <span class="text-white text-bold align-center mx-30 mt-20 mb-0 rounded-2xl px-4 justify-center margin-right right-8 {{ blog.category.color }}">{{ blog.category.name }}</span>
+                        <h1 class="text-2xl underline">{{ blog.name }}</h1>
+                        <p class="text-gray-500">{{ blog.description | truncatewords:20 }}..</p>
+                        <span><i class="fa fa-tags" aria-hidden="true"></i>
+                        <strong>{{ blog.tags }}</strong></span>
                         <br>
-                        <span>{{ blog.tags }}</span>
+                        <span> <i class="fa fa-eye" aria-hidden="true"></i>
+                            Watched {{ blog.view_count }} times</span>
                         <br>
                         <br>
-                        <a class="text-center text-1xl justify-center" href="{% url 'blogs:details' blog.id %}">Learn More</a>
+                        <a class="text-center text-sm justify-center mt-1 text-sm text-green-500" href="{% url 'blogs:details' blog.id %}"><strong class="underline text-1xl">Learn More</strong></a>
                     </div>
                 </a>
             </div>

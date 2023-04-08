@@ -5,26 +5,32 @@
 
 
 {% block content %}
-<div class="grid grid-cols-5 gap-6">
-    <div class="col-span-3">
+<div class="grid grid-cols-8 gap-8">
+    <div class="col-span-2">
         <img src="{{ blog.image.url }}" class="rounded-xl">
     </div>
 
     <div class="col-span-4 bg-gray-100 rounded-t-xl h-full">
+        <strong><h6 class="{{ blog.category.color }} text-center text-white text-bold rounded-2xl">{{ blog.category.name }} {{ blog.tags }}</h6></strong>
+        <br>
         <h1 class="text-center text-4xl text-bold">{{ blog.name }}</h1>
         <br>
-        <p class="text-black-500">
+        <p class="text-black-500 w-full">
             {{ blog.description }}
         </p>
         <br>
-        <h6>{{ blog.tags }}</h6>
         <br>
+        Category: <span class="text-bold text-white align-center mx-30 mt-20 mb-0 rounded-2xl px-4 justify-center margin-right right-8 {{ blog.category.color }}">#{{ blog.category.name }}</span>
         <hr class="w-72 bg-green-700 py-1 px-40 rounded-7xl w-48 h-xl mx-auto my-2 bg-green-100 border-0 rounded md:my-10">
         <p>If you liked my blog give a like / star and share on other platforms:</p>
-        <span class="">Like</span>
-        <span class="fa-facebook">Facebook</span>
-        <span>Twitter</span>
-        <span>Linkedin</span>
+        <form id="total_likes" action="{% url 'blogs:like_post' pk=blog.pk %}" method="POST">
+            {% csrf_token %}
+            <button type="submit"class="space-between">&nbsp<i class="fa fa-heart liked fa-2x" aria-hidden="true">&nbsp</i>&nbsp</button><h1 class="inline text-2xl">{{ blog.likes }} Likes</h1>
+        </form>
+        <br>
+        <a href="#" class="space-between">&nbsp<i class="fa fa-facebook-official fa-2x" aria-hidden="true">&nbsp</i>&nbsp</a>
+        <a href="#" class="space-between">&nbsp<i class="fa fa-twitter-square fa-2x" aria-hidden="true">&nbsp</i>&nbsp</a>
+        <a href="#" class="space-between">&nbsp<i class="fa fa-linkedin-square fa-2x" aria-hidden="true">&nbsp</i>&nbsp</a>
     </div>
 </div>
 {% endblock %}
