@@ -10,7 +10,7 @@
         <img src="{{ blog.image.url }}" class="rounded-xl">
     </div>
 
-    <div class="col-span-4 bg-gray-100 rounded-t-xl h-full">
+    <div class="col-span-4 bg-white-500 rounded-t-xl h-full">
         <strong><h6 class="{{ blog.category.color }} text-center text-white text-bold rounded-2xl">{{ blog.category.name }} {{ blog.tags }}</h6></strong>
         <br>
         <h1 class="text-center text-4xl text-bold">{{ blog.name }}</h1>
@@ -31,6 +31,53 @@
         <a href="#" class="space-between">&nbsp<i class="fa fa-facebook-official fa-2x" aria-hidden="true">&nbsp</i>&nbsp</a>
         <a href="#" class="space-between">&nbsp<i class="fa fa-twitter-square fa-2x" aria-hidden="true">&nbsp</i>&nbsp</a>
         <a href="#" class="space-between">&nbsp<i class="fa fa-linkedin-square fa-2x" aria-hidden="true">&nbsp</i>&nbsp</a>
+        <br>
+        <div class="mb-4 py-12 border-none">
+            <h1>Leave a comment if you want to discusss or give your opinoin !</h1>
+            <br>
+            <form method="POST">
+                {% csrf_token %}
+                <textarea style="width: 30em; height: 7em; border: none; resize: none; border-top: 2px solid green; border-bottom: 2px solid green;" class="bg-gray-10 resize-none border-none px-8 mx-20" placeholder="Enter something to discuss!"></textarea>
+            </form>
+            <button type="submit"><i class="fa-regular fa-comment-slash"></i>Comment</button>
+        </div>
+    </div>
+</div>
+
+
+<hr class="flex pb-1 bg-green-500 my-10 y-5 rounded-2xl border border-2">
+/* More Blogs **/
+<hr class="mb-8 my-5 pb-1 border border-2">
+    <div class="bg-gray-10 mt-4 py-12 rounded-xl border">
+        <h1 class="mb-12 text-3xl text-center">More Blogs</h1>
+        <hr class="flex w-72 bg-green-700 py-1 px-40 rounded-7xl w-48 h-xl mx-auto my-1 bg-green-100 border-0 rounded md:my-2">
+        <div class="border border-2">
+            <div class=" border border-2 mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+                {% for blog in blogs %}
+                <div class="group relative gap-y-1 border border-2">
+                    <a href="{% url 'blogs:details' blog.id %}">
+                        <div class="min-h-80 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md lg:aspect-none group-hover:opacity-100 lg:h-100">
+                            <img src="{{ blog.image.url }}" alt="image" class="rounded-t-xl">
+                        </div>
+                        
+    
+                        <div class="p-4 bg-white rounded-b-xl mt-4 flex justify-between">
+                            <span class="text-white text-bold align-center mx-30 mt-20 mb-0 rounded-2xl px-4 justify-center margin-right right-8 {{ blog.category.color }}">{{ blog.category.name }}</span>
+                            <h1 class="text-2xl underline">{{ blog.name }}</h1>
+                            <p class="text-gray-500">{{ blog.description | truncatewords:20 }}..</p>
+                            <span><i class="fa fa-tags" aria-hidden="true"></i>
+                            <strong>{{ blog.tags }}</strong></span>
+                            <br>
+                            <span> <i class="fa fa-eye" aria-hidden="true"></i>
+                                Watched {{ blog.view_count }} times</span>
+                            <br>
+                            <br>
+                            <a class="text-center text-sm justify-center mt-1 text-sm text-green-500" href="{% url 'blogs:details' blog.id %}"><strong class="underline text-1xl">Learn More</strong></a>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+        </div>
     </div>
 </div>
 {% endblock %}

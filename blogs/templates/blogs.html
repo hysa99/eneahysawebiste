@@ -4,9 +4,11 @@
 
 
 {% block content %}
+{% if user.is_authenticated %}
 <nav class="py-2 justify-center space-x-4 flex items-center">
 <a class="text-green-500 text-bold text-3xl text-right right-8" href="{% url 'dashboard:dashboard_view' %}"><i class="fa fa-area-chart color-green-500" aria-hidden="true"></i>  Dashboard</a>
 </nav>
+{% endif %}
 <div class="bg-gray-10 mt-4 py-12 rounded-xl">
     <h1 class="mb-12 text-3xl text-center">My latest blogs</h1>
     <div class="">

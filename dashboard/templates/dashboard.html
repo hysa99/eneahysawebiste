@@ -5,5 +5,23 @@
 
 
 
-{& block content &}
-{& end block&}
+{% block content %}
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <a href="#">Post</a>
+    <a href="#">Dashboards</a>
+</nav>
+<div class="border border-b-8 py-6 mx-8 rounded-lg">
+    <h1 class="text-center text-3xl">Here are the Total Posts we have done!</h1>
+    <strong><div class="text-center text-4xl">#{{ blog_count }}</div></strong>
+</div>
+<br>
+<div style="width: fit-content;" class="border border-b-8 py-8 mx-0 mx-3 rounded-lg">
+    <h1 class="text-center text-3xl">Posts Created per Category</h1>
+    <br>
+    {% for category in categories %}
+        <strong><div class="{{ category.color }} text-center text-2xl text-white rounded-2xl space-between mb-4">
+            {{ category.name }} - {{ category.post_count }}
+        </div></strong>
+    {% endfor %}
+</div>
+{% endblock %}

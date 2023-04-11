@@ -81,3 +81,11 @@ class Blogs_Items(models.Model):
 class Like(models.Model):
     blog_item = models.ForeignKey(Blogs_Items, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
+
+
+
+class Comment(models.Model):
+    name = models.TextField(blank=True, null=True)
+    email = models.EmailField(blank=True, null=True)
+    body = models.TextField(blank=True, null=True)
+

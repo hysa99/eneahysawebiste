@@ -20,5 +20,48 @@
         <button class="px-12"><i class="fa-solid fa-paper-plane-top"></i>Submit</button>
     </div>
 </form>
+<br>
+#//display the projects here !!
+<div class="border justify-between text-center border-b-8 border-t-2">
+    <h1 class="text-green-500 text-3xl underline"><strong>The Calculator</strong></h1>
+<br>
+    <form method="POST">
+    {% csrf_token %}
+    <div class="form-group underline underline-green">
+        <label>First Input:</label>
+        <input class="bg-green-200 rounded-2xl text-center py-1 px-2" name="num1" placeholder="first number">
+    </div>
+    <br>
+
+    <div class="form-group underline">
+        <label>Second Input</label>
+        <input class="bg-green-200 rounded-2xl text-center py-1 px-2" name="num2" placeholder="second number">
+    </div>
+    <br>
+
+    <div class="form-group">
+        <button class="btn text-white bg-green-700 rounded-2xl px-5 py-2 mb-4 inline" type="submit" name="add">Get Sum</button>
+        <button class="btn text-white bg-green-700 rounded-2xl px-5 py-2 mb-4 inline" type="submit" name="div">Divide</button>
+        <button class="btn text-white bg-green-700 rounded-2xl px-5 py-2 mb-4 inline" type="submit" name="sub">Substract</button>
+        <button class="btn text-white bg-green-700 rounded-2xl px-5 py-2 mb-4 inline" type="submit" name="mult">Multiply</button>
+    </div>
+    <br>
+    <hr>
+</form>
+    <div class="form-group">
+        <label>The Resultt</label>
+        <h1 class="bg-green-500 text-white text-2xl rounded-2xl"><strong>{{ result }}</strong></h1>
+    </div>
+    <br>
+</div>
+<br>
+<hr>
+<br>
+<div>
+   <h1>My Simple Travel Advisor Demo 1.0</h1> 
+   <div>
+    <img src="" alt="">
+   </div>
+</div>
 
 {% endblock %}

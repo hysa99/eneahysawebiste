@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .forms import BlogsForm
+from .forms import BlogsForm, CommentsForm
 from django.views.decorators.http import require_POST
-from .models import Blogs_Items, Category, Like
+from .models import Blogs_Items, Category, Like, Comment
 from django.http import JsonResponse
 from django.urls import reverse
 
@@ -28,11 +28,15 @@ def blog_home(request):
 
 
 def details(request, pk,):
+    blogs = Blogs_Items.objects.filter(is_created=True).order_by('-published_at')[0:4]
+    categories = Category.objects.all()
     blog = get_object_or_404(Blogs_Items, pk=pk)
     blog.view_count += 1
     blog.save()
     return render(request, 'details.html', {
         'blog': blog,
+        'blogs': blogs,
+        'categories': categories,
     })
 
 
@@ -51,4 +55,20 @@ def like_post(request, pk):
         blog.likes += 1
         blog.save()
     return HttpResponseRedirect(reverse('blogs:details', args=[pk]))
+
+
+
+
+def load_comment(request):
+    if request.method == 'POST':
+        form = CommentsForm(request.POST)
+        if form.is_valid():
+            comment = form.cleaned_data['comment']
+            Comment.objects.create(comment=comment)
+            return redirect('comment')
+        else:
+            form = CommentsForm()
+            return render(request, 'details.html', {
+                'form': form
+            })
 
